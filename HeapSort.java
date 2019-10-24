@@ -17,7 +17,7 @@ public class HeapSort {
     }
 
     private static boolean compareOnce() {
-        int[] randomAry = getRandomAry(20, 100);
+        int[] randomAry = getRandomAry(40, 100);
         int[] check=new int[randomAry.length];
         System.arraycopy(randomAry,0,check,0,randomAry.length);
         List<Integer> checkL=Arrays.stream(check).boxed().collect(Collectors.toList());
@@ -65,18 +65,18 @@ public class HeapSort {
     }
 
     public static void heapSort(int[] ary){
-        int length=ary.length;
-        for (int i=0;i<length;i++){
-            //第n次build
-            changeTopTail(ary, length, i);
-
+        int size=ary.length;
+        buildTopIsMaxHeap(ary,size);
+        for (int i=0;i<size-1;++i){
+            changeTopTail(ary,i);
         }
     }
 
-    private static void changeTopTail(int[] ary, int length, int i) {
-        buildTopIsMaxHeap(ary,length-i);
+    private static void changeTopTail(int[] ary, int i) {
+        int length=ary.length;
         int tmp=ary[0];
         ary[0]=ary[length-i-1];
         ary[length-i-1]=tmp;
+        buildTopIsMaxTriangle(ary,0,length-i-1);
     }
 }
